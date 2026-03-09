@@ -52,6 +52,7 @@ This card produces an `entity-row` and must therefore be configured as an entity
 | column            | bool          | `false`                             | Show entities in a column instead of a row       |
 | styles            | object        |                                     | Add custom CSS styles to the state element       |
 | format            | string        | _[Formatting](#formatting)_         | Format main state/attribute value                |
+| show_zero_duration| string/bool   | `false`                             | Display format for zero duration: `false` (hide), `true` or `"seconds"` (show "0"), `"minutes"` (show "0:00"), `"hours"` (show "0:00:00") |
 |                   |
 | entities          | list          | _[Entity Objects](#entity-objects)_ | Additional entity IDs or entity object(s)        |
 | secondary_info    | string/object | _[Secondary Info](#secondary-info)_ | Custom `secondary_info` entity                   |
@@ -84,6 +85,7 @@ attribute value instead of the state value. `icon` lets you display an icon inst
 | hide_if          | object/any  | _[Hiding](#hiding)_         | Hide entity if its value matches specified value or criteria       |
 | styles           | object      |                             | Add custom CSS styles to the entity element                        |
 | format           | string      | _[Formatting](#formatting)_ | Format entity value                                                |
+| show_zero_duration| string/bool | `false`                     | Display format for zero duration: `false` (hide), `true` or `"seconds"` (show "0"), `"minutes"` (show "0:00"), `"hours"` (show "0:00:00") |
 | tap_action       | object      | _[Actions](#actions)_       | Custom entity tap action                                           |
 
 Note that `hold_action` and `double_tap_action` are currently **not** supported on additional entities.
@@ -112,6 +114,7 @@ an object containing configuration options listed below, or any of the default s
 | hide_unavailable | bool        | `false`                     | Hide secondary info if unavailable or not found          |
 | hide_if          | object/any  | _[Hiding](#hiding)_         | Hide secondary info if value matches specified criteria  |
 | format           | string      | _[Formatting](#formatting)_ | Format secondary info value                              |
+| show_zero_duration| string/bool | `false`                     | Display format for zero duration: `false` (hide), `true` or `"seconds"` (show "0"), `"minutes"` (show "0:00"), `"hours"` (show "0:00:00") |
 
 ### Actions
 

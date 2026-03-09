@@ -1,6 +1,11 @@
 # Changelog
 All notable changes to this project will be documented in this file.
 
+## [Unreleased]
+
+**Added:**
+- Option `show_zero_duration` with multiple display modes for zero duration: `false` (hide), `true` or `"seconds"` (show "0"), `"minutes"` (show "0:00"), `"hours"` (show "0:00:00") (#xxx)
+
 ## 4.5.1
 
 **Fixed:**
