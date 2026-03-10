@@ -4,7 +4,7 @@ All notable changes to this project will be documented in this file.
 ## [Unreleased]
 
 **Added:**
-- Option `show_zero_duration` with multiple display modes for zero duration: `false` (hide), `true` or `"seconds"` (show "0"), `"minutes"` (show "0:00"), `"hours"` (show "0:00:00") (#xxx)
+- Option `show_zero_duration` with multiple display modes for zero duration: `false` (hide), `true` or `"seconds"` (show "0"), `"minutes"` (show "0:00"), `"hours"` (show "0:00:00"), `"days"` (show "0:00:00:00") (#xxx)
 - Option `duration_template` for custom duration formatting using templates like `dd:hh:mm:ss` (#xxx)
 
 ## 4.5.1

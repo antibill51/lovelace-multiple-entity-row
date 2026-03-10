@@ -46,7 +46,9 @@ export function secondsToDuration(d, options = {}) {
 
     // Handle zero duration display options
     if (d === 0 && options.showZero) {
-        if (options.showZero === 'hours') {
+        if (options.showZero === 'days') {
+            return '0:00:00:00';
+        } else if (options.showZero === 'hours') {
             return '0:00:00';
         } else if (options.showZero === 'minutes') {
             return '0:00';
