@@ -3,10 +3,34 @@
 const leftPad = (num) => (num < 10 ? `0${num}` : num);
 
 export function secondsToDuration(d, options = {}) {
-    const h = Math.floor(d / 3600);
+    const days = Math.floor(d / 86400);
+    const h = Math.floor((d % 86400) / 3600);
     const m = Math.floor((d % 3600) / 60);
     const s = Math.floor((d % 3600) % 60);
 
+    if (options.template) {
+        let result = options.template;
+        result = result.replace(/dd/g, leftPad(days));
+        result = result.replace(/hh/g, leftPad(h));
+        result = result.replace(/mm/g, leftPad(m));
+        result = result.replace(/ss/g, leftPad(s));
+        // Remove leading zeros if not showing zero
+        if (!options.showZero && result.startsWith('00:')) {
+            result = result.substring(3);
+        }
+        if (!options.showZero && result.startsWith('00:') && !result.includes(':')) {
+            result = result.substring(3);
+        }
+        // If all zero and not showing zero, return null
+        if (!options.showZero && /^0+(:0+)*$/.test(result.replace(/:/g, ''))) {
+            return null;
+        }
+        return result;
+    }
+
+    if (days > 0) {
+        return `${days}:${leftPad(h)}:${leftPad(m)}:${leftPad(s)}`;
+    }
     if (h > 0) {
         return `${h}:${leftPad(m)}:${leftPad(s)}`;
     }

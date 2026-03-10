@@ -34,6 +34,6 @@
   "scripts": {
     "lint": "eslint src/**/*.js",
     "dev": "webpack -c webpack.config.js",
-    "build": "yarn lint && webpack -c webpack.config.js"
+    "build": "npm run lint && webpack -c webpack.config.js"
   }
 }
