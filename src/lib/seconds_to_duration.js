@@ -10,17 +10,10 @@ export function secondsToDuration(d, options = {}) {
 
     if (options.template) {
         let result = options.template;
-        result = result.replace(/dd/g, leftPad(days));
-        result = result.replace(/hh/g, leftPad(h));
+        result = result.replace(/dd/g, days.toString()); // No padding for days
+        result = result.replace(/hh/g, h.toString()); // No padding for hours
         result = result.replace(/mm/g, leftPad(m));
         result = result.replace(/ss/g, leftPad(s));
-        // Remove leading zeros if not showing zero
-        if (!options.showZero && result.startsWith('00:')) {
-            result = result.substring(3);
-        }
-        if (!options.showZero && result.startsWith('00:') && !result.includes(':')) {
-            result = result.substring(3);
-        }
         // If all zero and not showing zero, return null
         if (!options.showZero && /^0+(:0+)*$/.test(result.replace(/:/g, ''))) {
             return null;
@@ -44,17 +37,9 @@ export function secondsToDuration(d, options = {}) {
         return '' + s;
     }
 
-    // Handle zero duration display options
+    // Handle zero duration display options (legacy, when no template)
     if (d === 0 && options.showZero) {
-        if (options.showZero === 'days') {
-            return '0:00:00:00';
-        } else if (options.showZero === 'hours') {
-            return '0:00:00';
-        } else if (options.showZero === 'minutes') {
-            return '0:00';
-        } else if (options.showZero === 'seconds' || options.showZero === true) {
-            return '0';
-        }
+        return '0:00:00';
     }
 
     return null;

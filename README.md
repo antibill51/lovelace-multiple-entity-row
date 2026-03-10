@@ -52,7 +52,7 @@ This card produces an `entity-row` and must therefore be configured as an entity
 | column            | bool          | `false`                             | Show entities in a column instead of a row       |
 | styles            | object        |                                     | Add custom CSS styles to the state element       |
 | format            | string        | _[Formatting](#formatting)_         | Format main state/attribute value                |
-| show_zero_duration| string/bool   | `false`                             | Display format for zero duration: `false` (hide), `true` or `"seconds"` (show "0"), `"minutes"` (show "0:00"), `"hours"` (show "0:00:00"), `"days"` (show "0:00:00:00") |
+| show_zero_duration| bool   | `false`                             | Display zero duration: `false` (hide), `true` (show according to format/template) |
 | duration_template | string        |                                     | Custom template for duration formatting (e.g., `dd:hh:mm:ss`) |
 |                   |
 | entities          | list          | _[Entity Objects](#entity-objects)_ | Additional entity IDs or entity object(s)        |
@@ -86,7 +86,7 @@ attribute value instead of the state value. `icon` lets you display an icon inst
 | hide_if          | object/any  | _[Hiding](#hiding)_         | Hide entity if its value matches specified value or criteria       |
 | styles           | object      |                             | Add custom CSS styles to the entity element                        |
 | format           | string      | _[Formatting](#formatting)_ | Format entity value                                                |
-| show_zero_duration| string/bool | `false`                     | Display format for zero duration: `false` (hide), `true` or `"seconds"` (show "0"), `"minutes"` (show "0:00"), `"hours"` (show "0:00:00"), `"days"` (show "0:00:00:00") |
+| show_zero_duration| bool | `false`                     | Display zero duration: `false` (hide), `true` (show according to format/template) |
 | duration_template | string      |                             | Custom template for duration formatting (e.g., `dd:hh:mm:ss`) |
 | tap_action       | object      | _[Actions](#actions)_       | Custom entity tap action                                           |
 
@@ -116,7 +116,7 @@ an object containing configuration options listed below, or any of the default s
 | hide_unavailable | bool        | `false`                     | Hide secondary info if unavailable or not found          |
 | hide_if          | object/any  | _[Hiding](#hiding)_         | Hide secondary info if value matches specified criteria  |
 | format           | string      | _[Formatting](#formatting)_ | Format secondary info value                              |
-| show_zero_duration| string/bool | `false`                     | Display format for zero duration: `false` (hide), `true` or `"seconds"` (show "0"), `"minutes"` (show "0:00"), `"hours"` (show "0:00:00"), `"days"` (show "0:00:00:00") |
+| show_zero_duration| bool | `false`                     | Display zero duration: `false` (hide), `true` (show according to format/template) |
 | duration_template| string      |                             | Custom template for duration formatting (e.g., `dd:hh:mm:ss`) |
 
 ### Actions
