@@ -10,10 +10,16 @@ export function secondsToDuration(d, options = {}) {
 
     if (options.template) {
         let result = options.template;
+        const hasDd = options.template.includes('dd');
+        const hasHh = options.template.includes('hh');
+        const hasMm = options.template.includes('mm');
+        const padHours = hasDd;
+        const padMinutes = hasHh || hasDd;
+        const padSeconds = hasMm || hasHh || hasDd;
         result = result.replace(/dd/g, days.toString()); // No padding for days
-        result = result.replace(/hh/g, h.toString()); // No padding for hours
-        result = result.replace(/mm/g, leftPad(m));
-        result = result.replace(/ss/g, leftPad(s));
+        result = result.replace(/hh/g, padHours ? leftPad(h) : h.toString());
+        result = result.replace(/mm/g, padMinutes ? leftPad(m) : m.toString());
+        result = result.replace(/ss/g, padSeconds ? leftPad(s) : s.toString());
         // If all zero and not showing zero, return null
         if (!options.showZero && /^0+(:0+)*$/.test(result.replace(/:/g, ''))) {
             return null;
