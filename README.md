@@ -158,7 +158,7 @@ The `format` option supports the following values:
 | celsius_to_fahrenheit | `number`    | Converts a Celsius temperature to its Fahrenheit equivalent      |
 | fahrenheit_to_celsius | `number`    | Converts a Fahrenheit temperature to its Celsius equivalent      |
 
-**Note on duration formatting:** The `duration_template` option allows custom formatting of duration values using placeholders: `dd` for days, `hh` for hours, `mm` for minutes, `ss` for seconds. For example, `dd:hh:mm:ss` will display durations including days. When `show_zero_duration` is `false`, leading zero components are automatically hidden.
+**Note on duration formatting:** The `duration_template` option allows custom formatting of duration values using placeholders: `dd` for days, `hh` for hours, `mm` for minutes, `ss` for seconds. Hours and days are not zero-padded for cleaner display. For example, `dd:hh:mm:ss` will display durations including days.
 
 ### Hiding
 
