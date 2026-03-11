@@ -15,39 +15,28 @@ export function secondsToDuration(d, options = {}) {
         const hasMm = options.template.includes('mm');
         const hasSs = options.template.includes('ss');
 
-        // Handle carrying over values from larger units to smaller ones if those units are not in template
-        if (!hasDd && hasHh) {
-            // If template doesn't have days but has hours, carry days to hours
-            h += days * 24;
-            days = 0;
-        }
-        if (!hasHh && hasMm) {
-            // If template doesn't have hours but has minutes, carry hours to minutes
-            m += h * 60;
-            h = 0;
-        }
-        if (!hasMm && hasSs) {
-            // If template doesn't have minutes but has seconds, carry minutes to seconds
-            s += m * 60;
-            m = 0;
-        }
+        // Convert all time to the smallest visible unit, then redistribute to visible units
+        // This handles all template combinations correctly (consecutive or not)
+        let totalSeconds = days * 86400 + h * 3600 + m * 60 + s;
 
-        // Handle seconds if not in template - add to smallest visible unit
-        if (!hasSs) {
-            if (hasMm) {
-                // Minutes are shown, add remaining seconds to minutes
-                m += Math.floor(s / 60);
-                s = s % 60;
-            } else if (hasHh) {
-                // Only hours and above shown, add seconds and minutes to hours
-                h += Math.floor(s / 3600);
-                m += Math.floor((s % 3600) / 60);
-                s = 0;
-            } else if (hasDd) {
-                // Only days shown, add all smaller units to days
-                days += Math.floor(s / 86400);
-                s = 0;
-            }
+        // Reset all units
+        days = h = m = s = 0;
+
+        // Redistribute to visible units starting from largest
+        if (hasDd) {
+            days = Math.floor(totalSeconds / 86400);
+            totalSeconds %= 86400;
+        }
+        if (hasHh) {
+            h = Math.floor(totalSeconds / 3600);
+            totalSeconds %= 3600;
+        }
+        if (hasMm) {
+            m = Math.floor(totalSeconds / 60);
+            totalSeconds %= 60;
+        }
+        if (hasSs) {
+            s = totalSeconds;
         }
 
         const padHours = hasDd;
