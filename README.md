@@ -148,7 +148,8 @@ The `format` option supports the following values:
 | datetime              | `timestamp` | Convert timestamp value to date and time                         |
 | brightness            | `number`    | Convert brightness value to percentage                           |
 | duration              | `number`    | Convert number of seconds to duration (`5:38:50`)                |
-| duration-m            | `number`    | Convert number of milliseconds to duration (`5:38:50`)           |
+| duration-ms           | `number`    | Convert number of milliseconds to duration (`5:38:50`)           |
+| duration-m            | `number`    | Convert number of minutes to duration (`5:38:50`)                |
 | duration-h            | `number`    | Convert number of hours to duration (`5:38:50`)                  |
 | duration_template     | `string`    | Custom template for duration formatting (e.g., `dd:hh:mm:ss`)    |
 | invert                | `number`    | Convert number from positive to negative or vice versa           |
@@ -158,7 +159,12 @@ The `format` option supports the following values:
 | celsius_to_fahrenheit | `number`    | Converts a Celsius temperature to its Fahrenheit equivalent      |
 | fahrenheit_to_celsius | `number`    | Converts a Fahrenheit temperature to its Celsius equivalent      |
 
-**Note on duration formatting:** The `duration_template` option allows custom formatting of duration values using placeholders: `dd` for days, `hh` for hours, `mm` for minutes, `ss` for seconds. Hours and days are not zero-padded for cleaner display. For example, `dd:hh:mm:ss` will display durations including days.
+**Note on duration formatting:** The `duration_template` option allows custom formatting of duration values using placeholders: `dd` for days, `hh` for hours, `mm` for minutes, `ss` for seconds. Hours and days are not zero-padded for cleaner display.
+
+When a duration template is used, values from larger units are automatically carried over to smaller units if those larger units are not in the template. This enables correct display of durations at different time scales:
+- For example, 1 day + 1 hour + 1 minute + 1 second with template `hh:mm` will display as `25:01` (25 hours and 1 minute), not `1:01`, because the day is carried over to hours and seconds are rounded up
+- With template `ss`, the entire duration is converted to seconds
+- With template `mm:ss`, only minutes and seconds are shown, with hours and days carried over to minutes
 
 ### Hiding
 

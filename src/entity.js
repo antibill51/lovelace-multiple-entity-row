@@ -46,8 +46,11 @@ export const entityStateDisplay = (hass, stateObj, config) => {
         } else if (config.format === 'duration') {
             value = secondsToDuration(value, { showZero: config.show_zero_duration, template: config.duration_template });
             unit = undefined;
-        } else if (config.format === 'duration-m') {
+        } else if (config.format === 'duration-ms') {
             value = secondsToDuration(value / 1000, { showZero: config.show_zero_duration, template: config.duration_template });
+            unit = undefined;
+        } else if (config.format === 'duration-m') {
+            value = secondsToDuration(value * 60, { showZero: config.show_zero_duration, template: config.duration_template });
             unit = undefined;
         } else if (config.format === 'duration-h') {
             value = secondsToDuration(value * 3600, { showZero: config.show_zero_duration, template: config.duration_template });

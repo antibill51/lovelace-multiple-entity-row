@@ -3,16 +3,50 @@
 const leftPad = (num) => (num < 10 ? `0${num}` : num);
 
 export function secondsToDuration(d, options = {}) {
-    const days = Math.floor(d / 86400);
-    const h = Math.floor((d % 86400) / 3600);
-    const m = Math.floor((d % 3600) / 60);
-    const s = Math.floor((d % 3600) % 60);
+    let days = Math.floor(d / 86400);
+    let h = Math.floor((d % 86400) / 3600);
+    let m = Math.floor((d % 3600) / 60);
+    let s = Math.floor((d % 3600) % 60);
 
     if (options.template) {
         let result = options.template;
         const hasDd = options.template.includes('dd');
         const hasHh = options.template.includes('hh');
         const hasMm = options.template.includes('mm');
+        const hasSs = options.template.includes('ss');
+
+        // Handle carrying over values from larger units to smaller ones if those units are not in template
+        if (!hasDd && hasHh) {
+            // If template doesn't have days but has hours, carry days to hours
+            h += days * 24;
+            days = 0;
+        }
+        if (!hasHh && hasMm) {
+            // If template doesn't have hours but has minutes, carry hours to minutes
+            m += h * 60;
+            h = 0;
+        }
+        if (!hasMm && hasSs) {
+            // If template doesn't have minutes but has seconds, carry minutes to seconds
+            s += m * 60;
+            m = 0;
+        }
+        if (!hasSs) {
+            // If template doesn't have seconds, carry all seconds up
+            if (!hasMm) {
+                m += Math.floor(s / 60);
+                s = s % 60;
+            }
+            if (!hasHh) {
+                h += Math.floor(m / 60);
+                m = m % 60;
+            }
+            if (!hasDd) {
+                days += Math.floor(h / 24);
+                h = h % 24;
+            }
+        }
+
         const padHours = hasDd;
         const padMinutes = hasHh || hasDd;
         const padSeconds = hasMm || hasHh || hasDd;
