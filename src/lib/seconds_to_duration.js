@@ -31,19 +31,22 @@ export function secondsToDuration(d, options = {}) {
             s += m * 60;
             m = 0;
         }
+
+        // Handle seconds if not in template - add to smallest visible unit
         if (!hasSs) {
-            // If template doesn't have seconds, carry all seconds up
-            if (!hasMm) {
+            if (hasMm) {
+                // Minutes are shown, add remaining seconds to minutes
                 m += Math.floor(s / 60);
                 s = s % 60;
-            }
-            if (!hasHh) {
-                h += Math.floor(m / 60);
-                m = m % 60;
-            }
-            if (!hasDd) {
-                days += Math.floor(h / 24);
-                h = h % 24;
+            } else if (hasHh) {
+                // Only hours and above shown, add seconds and minutes to hours
+                h += Math.floor(s / 3600);
+                m += Math.floor((s % 3600) / 60);
+                s = 0;
+            } else if (hasDd) {
+                // Only days shown, add all smaller units to days
+                days += Math.floor(s / 86400);
+                s = 0;
             }
         }
 
